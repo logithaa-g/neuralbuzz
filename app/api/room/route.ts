@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { kv } from "@vercel/kv";
+import { Redis } from "@upstash/redis";
+const kv = Redis.fromEnv();
 import { Room } from "@/lib/questions";
 
 export async function GET(req: NextRequest) {
