@@ -1,8 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function Home() {
+function HomeInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [joinCode, setJoinCode] = useState(searchParams.get("join") || "");
@@ -124,5 +124,13 @@ export default function Home() {
         ))}
       </div>
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div className="page"><div style={{color:"var(--text-muted)"}}>Loading...</div></div>}>
+      <HomeInner />
+    </Suspense>
   );
 }
